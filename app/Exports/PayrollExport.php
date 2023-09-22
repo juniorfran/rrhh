@@ -65,7 +65,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
             $payroll->employeeID,
             $employee->decryptToCollection()->full_name,
             $payroll->deptName,
-            $payroll->designationName,
+            //$payroll->designationName,
             $payroll->basic,
             $payroll->overtime_hours,
             $payroll->overtime_pay,
