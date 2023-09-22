@@ -30,6 +30,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
                 'payrolls.basic as basic',
                 'overtime_hours',
                 'overtime_pay',
+                'allowances',
                 'total_allowance',
                 'deductions',
                 'total_deduction',
@@ -45,6 +46,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
     {
         // Decodifica el JSON en la columna "deductions" y lo convierte en un array asociativo
         $deductions = json_decode($payroll->deductions, true);
+        $allowances = json_decode($payroll->$allowances, true);
 
         // Formatea los valores de las deducciones
         $formattedDeductions = [];
@@ -53,9 +55,9 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
         }
 
         //Formatea los valores de las prestaciones
-        $formattedAllowance = [];
-        foreach ($payroll->allowances as $allowance) {
-            $formattedAllowance[] = $allowance;
+        $formattedAllowances = [];
+        foreach ($allowances as $allowanceType => $amount) {
+        $formattedAllowances[] = "$allowanceType: $amount";
         }
 
         $employee = Employee::where('employeeID', $payroll->employeeID)->first();
@@ -67,7 +69,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
             $payroll->basic,
             $payroll->overtime_hours,
             $payroll->overtime_pay,
-            implode(', ', $formattedAllowance),
+            implode(', ', $formattedAllowances),
             $payroll->total_allowance,
             implode(', ', $formattedDeductions),
             $payroll->total_deduction,
