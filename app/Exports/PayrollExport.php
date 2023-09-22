@@ -32,6 +32,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
                 'overtime_pay',
                 'total_allowance',
                 'total_deduction',
+                'deductions',
                 'net_salary'
             )
             ->where('month', '=', request()->get('month'))->where('year', '=', request()->get('year'))->get();
@@ -54,24 +55,25 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
             $payroll->total_allowance,
             $payroll->total_deduction,
             $payroll->net_salary,
+            $payroll->deductions,
         ];
     }
 
     public function headings(): array
     {
-        $monthName = date('F', mktime(0, 0, 0, request()->get('month'), 10)); // March
+        $monthName = date('F', mktime(0, 0, 0, request()->get('Mes'), 10)); // March
         return [
             [
                 admin()->company->company_name,
             ],
-            ['Payroll Report'],
-            ['Period:', $monthName . ',' . request()->get('year')],
-            ['Printed On:', date('d/m/Y, g:i a')],
+            ['Reporte de Planilla'],
+            ['Periodo:', $monthName . ',' . request()->get('month')],
+            ['Fecha de planilla:', date('d/m/Y, g:i a')],
             [],
             [],
             [
                 'Employee ID', 'Employee Name', 'Department', 'Designation', 'Basic Salary', 'Total hours',
-                'Total Hourly Payment', 'Total Allowance', 'Total Deduction', 'Net Salary'
+                'Total Hourly Payment', 'Total Allowance', 'Total Deduction', 'Net Salary', 'Deduction'
             ]
         ];
     }

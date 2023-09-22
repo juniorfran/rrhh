@@ -19,15 +19,15 @@
 			<div class="page-bar">
 				<ul class="page-breadcrumb breadcrumb">
 					<li>
-						<a onclick="loadView('{{route('admin.dashboard.index')}}')">Home</a>
+						<a onclick="loadView('{{route('admin.dashboard.index')}}')">Inicio</a>
 						<i class="fa fa-circle"></i>
 					</li>
 					<li>
-						<a href="{{ route('admin.payrolls.index') }}">Payroll</a>
+						<a href="{{ route('admin.payrolls.index') }}">Planilla de Sueldos</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="">Salary Slip</a>
+						<a href="">Planilla</a>
 					</li>
 				</ul>
 
@@ -47,7 +47,7 @@
 							<div class="portlet box blue-hoki">
 					<div class="portlet-title">
 						<div class="caption font-dark">
-							Employee Info
+							Informacion del Empleado
 						</div>
 					</div>
 					<div class="portlet-body">
@@ -65,6 +65,7 @@
 												<div class="col-md-9">
 												 {!! HTML::image($payroll->employee->profile_image_url,'ProfileImage',['height'=>'100px']) !!}
 
+
 												</div>
 											</div>
 										</div>
@@ -73,10 +74,10 @@
 										<div class="form-group">
 											<div class="col-md-9">
 												<ul>
-													<li><h4>EmployeeID: {{$payroll->employee->employeeID}}</h4></li>
-													<li><h4>Name:  {{$payroll->employee->full_name}}</h4></li>
-													<li><h4>Month: {{date('F', strtotime($payroll->month . '01'));}}</h4></li>
-													<li><h4>Year:  {{$payroll->year}}</h4></li>
+													<li><h4>ID Empleado: {{$payroll->employee->employeeID}}</h4></li>
+													<li><h4>Nombre:  {{$payroll->employee->full_name}}</h4></li>
+													<li><h4>Mes: {{date('F', strtotime($payroll->month . '01'));}}</h4></li>
+													<li><h4>Año:  {{$payroll->year}}</h4></li>
 												</ul>
 											</div>
 										</div>
@@ -106,34 +107,34 @@
                         							<div class="portlet box blue-hoki">
                         					<div class="portlet-title">
                         						<div class="caption font-dark">
-                        						Edit Salary info
+                        						Editar Informacion Salarial
                         						</div>
                         					</div>
                         					<div class="portlet-body">
 
 
                 										<div class="form-group">
-                												<label class="control-label col-md-2">OverTime Hours:</label>
+                												<label class="control-label col-md-2">Horas Extras:</label>
                 												<div class="col-md-8 margin-bottom-10">
                 												<label class="control-label">{{$payroll->overtime_hours}}</label>
 
                 												</div>
                 										</div>
                 										<div class="form-group">
-                												<label class="control-label col-md-2">Overtime Payment ( {{$loggedAdmin->company->currency_symbol}} ):</label>
+                												<label class="control-label col-md-2">Pago de Horas Extras ( {{$loggedAdmin->company->currency_symbol}} ):</label>
                 												<div class="col-md-8 margin-bottom-10">
                 												<label class="control-label">{{$payroll->overtime_pay}}</label>
 
                 												</div>
                 										</div>
                 										<div class="form-group">
-                												<label class="control-label col-md-2">Basic Salary ( {{$loggedAdmin->company->currency_symbol}} ):</label>
+                												<label class="control-label col-md-2">Salario Base ( {{$loggedAdmin->company->currency_symbol}} ):</label>
                 												<div class="col-md-8 margin-bottom-10">
                 												<label class="control-label">{{number_format($payroll->basic, 2)}}</label>
                 												</div>
                 										</div>
 														<div class="form-group">
-																<label class="control-label col-md-2">Expense Claim( {{$loggedAdmin->company->currency_symbol}} ):</label>
+																<label class="control-label col-md-2">Reclamacion de Gastos( {{$loggedAdmin->company->currency_symbol}} ):</label>
 																<div class="col-md-8 margin-bottom-10">
 																<label class="control-label">{{number_format($payroll->expense, 2)}}</label>
 																</div>
@@ -148,7 +149,7 @@
                 						<div class="portlet box blue-hoki">
                 							<div class="portlet-title">
                 								<div class="caption font-dark">
-                								Edit Allowances
+                								Editar Asiganaciones
                 								</div>
                 							</div>
                 							<div class="portlet-body">
@@ -182,7 +183,7 @@
                 						<div class="portlet box blue-hoki">
                 							<div class="portlet-title">
                 								<div class="caption font-dark">
-                								Edit Deductions
+                								Editar Deducciones
                 								</div>
                 							</div>
                 							<div class="portlet-body">
@@ -215,28 +216,28 @@
                 									<div class="portlet box blue-hoki">
                 										<div class="portlet-title">
                 											<div class="caption font-dark">
-                											GROSS
+                											BRUTO
                 											</div>
                 										</div>
                 										<div class="portlet-body">
 
 
                 											<div class="form-group">
-                													<label class="control-label col-md-2">Total Allowances ( {{$loggedAdmin->company->currency_symbol}} )</label>
+                													<label class="control-label col-md-2">Total Asiganaciones( {{$loggedAdmin->company->currency_symbol}} )</label>
                 													<div class="col-md-8 margin-bottom-10">
                 														<label class="control-label">{{number_format($payroll->total_allowance, 2)}}</label>
 
                 													</div>
                 											</div>
                 											<div class="form-group">
-                													<label class="control-label col-md-2">Total Deductions ( {{$loggedAdmin->company->currency_symbol}} )</label>
+                													<label class="control-label col-md-2">Total Deducciones ( {{$loggedAdmin->company->currency_symbol}} )</label>
                 													<div class="col-md-8 margin-bottom-10">
                 														<label class="control-label">{{number_format($payroll->total_deduction, 2)}}</label>
 
                 													</div>
                 											</div>
                 											<div class="form-group">
-                													<label class="control-label col-md-2">Net Salary ( {{$loggedAdmin->company->currency_symbol}} )</label>
+                													<label class="control-label col-md-2">Salario Neto ( {{$loggedAdmin->company->currency_symbol}} )</label>
                 													<div class="col-md-8 margin-bottom-10">
                 														<label class="control-label">{{number_format($payroll->net_salary, 2)}}</label>
 

@@ -47,7 +47,7 @@
                                         <input type="submit" name="submit" class="input-lg btn btn-primary"
                                                value="Try for FREE!"/>
                                     </form>
-                                    <h2 class="animation animated-item-2"{{__('home.noCreditCard')}}</h2>
+                                    <h2 class="animation animated-item-2">{{__('home.noCreditCard')}}</h2>
                                 </div>
                             </div>
                         </div>

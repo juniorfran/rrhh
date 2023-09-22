@@ -59,8 +59,8 @@
 
                 <div class="col-md-7 margin-bottom-10">
                     <select class="form-control select2me" name="status">
-                            <option value="paid">Paid</option>
-                            <option value="unpaid">Unpaid</option>
+                            <option value="paid">Pagado</option>
+                            <option value="unpaid">Sin Pagar</option>
                     </select>
                 </div>
             </div>
