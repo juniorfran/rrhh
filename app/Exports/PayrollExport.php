@@ -31,8 +31,8 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
                 'overtime_hours',
                 'overtime_pay',
                 'total_allowance',
-                'total_deduction',
                 'deductions',
+                'total_deduction',
                 'net_salary'
             )
             ->where('month', '=', request()->get('month'))->where('year', '=', request()->get('year'))->get();
@@ -43,6 +43,14 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
      */
     public function map($payroll): array
     {
+        // Decodifica el JSON en la columna "deductions" y lo convierte en un array asociativo
+        $deductions = json_decode($payroll->deductions, true);
+
+        // Formatea los valores de las deducciones
+        $formattedDeductions = [];
+        foreach ($deductions as $deductionType => $amount) {
+        $formattedDeductions[] = "$deductionType: $amount";
+        }
         $employee = Employee::where('employeeID', $payroll->employeeID)->first();
         return [
             $payroll->employeeID,
@@ -53,9 +61,10 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
             $payroll->overtime_hours,
             $payroll->overtime_pay,
             $payroll->total_allowance,
+            implode(', ', $formattedDeductions),
             $payroll->total_deduction,
             $payroll->net_salary,
-            $payroll->deductions,
+
         ];
     }
 
@@ -73,7 +82,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
             [],
             [
                 'Employee ID', 'Employee Name', 'Department', 'Designation', 'Basic Salary', 'Total hours',
-                'Total Hourly Payment', 'Total Allowance', 'Total Deduction', 'Net Salary', 'Deduction'
+                'Total Hourly Payment', 'Total Allowance','Deduction', 'Total Deduction', 'Net Salary'
             ]
         ];
     }
