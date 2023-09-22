@@ -116,7 +116,8 @@
             </strong></td>
     </tr>
     <tr>
-        <td><strong>@lang("core.employeeID"):</strong> {{ $payroll->employee->employeeID }} </td>
+        {{-- <td><strong>@lang("core.employeeID"):</strong> {{ $payroll->employee->employeeID }} </td> --}}
+        <td><strong>DUI:</strong> {{ $payroll->employee->employeeID }} </td>
         <td><strong>@lang("core.name"):</strong> {{$payroll->employee->full_name}}</td>
         <td><strong>@lang("core.payslipNumber"):</strong> {{$payslip_num}}</td>
     </tr>
