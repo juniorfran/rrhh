@@ -46,7 +46,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
     {
         // Decodifica el JSON en la columna "deductions" y lo convierte en un array asociativo
         $deductions = json_decode($payroll->deductions, true);
-        $allowances = json_decode($payroll->$allowances, true);
+        $allowances = json_decode($payroll->allowances, true);
 
         // Formatea los valores de las deducciones
         $formattedDeductions = [];
