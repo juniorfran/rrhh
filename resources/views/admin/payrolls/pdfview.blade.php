@@ -111,8 +111,8 @@
 <table class="emp">
     <tbody>
     <tr>
-        <td colspan="3" style="text-align: center; font-size: 18px;"><strong>Planilla <br>
-               Salario Mensual: {{ date('F', mktime(0, 0, 0, $payroll->month, 10))}}, {{$payroll->year}}
+        <td colspan="3" style="text-align: center; font-size: 18px;"><strong>@lang("core.payslip") <br>
+                @lang("core.salaryMonth"): {{ date('F', mktime(0, 0, 0, $payroll->month, 10))}}, {{$payroll->year}}
             </strong></td>
     </tr>
     <tr>
