@@ -51,6 +51,13 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
         foreach ($deductions as $deductionType => $amount) {
         $formattedDeductions[] = "$deductionType: $amount";
         }
+
+        //Formatea los valores de las prestaciones
+        $formattedAllowance = [];
+        foreach ($payroll->allowances as $allowance) {
+            $formattedAllowance[] = $allowance;
+        }
+
         $employee = Employee::where('employeeID', $payroll->employeeID)->first();
         return [
             $payroll->employeeID,
@@ -60,6 +67,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
             $payroll->basic,
             $payroll->overtime_hours,
             $payroll->overtime_pay,
+            implode(', ', $formattedAllowance),
             $payroll->total_allowance,
             implode(', ', $formattedDeductions),
             $payroll->total_deduction,
@@ -70,7 +78,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
 
     public function headings(): array
     {
-        $monthName = date('F', mktime(0, 0, 0, request()->get('Mes'), 10)); // March
+        $monthName = date('F', mktime(0, 0, 0, request()->get('month'), 10)); // March
         return [
             [
                 admin()->company->company_name,
@@ -81,8 +89,9 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
             [],
             [],
             [
-                'Employee ID', 'Employee Name', 'Department', 'Designation', 'Basic Salary', 'Total hours',
-                'Total Hourly Payment', 'Total Allowance','Deduction', 'Total Deduction', 'Net Salary'
+                //'DUI', 'NOMBRE', 'DEPARTAMENTO', 'Designation', 'Basic Salary', 'Total hours',
+                'DUI', 'NOMBRE', 'DEPARTAMENTO', 'SALARIO BASE', 'TOTAL HORAS',
+                'PAGO TOTAL POR HORA', 'PRESTACIONES', 'TOTAL ADICIONES','DEDUCCIONES', 'TOTAL DEDUCCIONES', 'SALARIO NETO'
             ]
         ];
     }
