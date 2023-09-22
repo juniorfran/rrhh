@@ -26,7 +26,7 @@ class PayrollExport implements FromCollection, WithMapping, WithHeadings
                 'employees.employeeID',
                 'full_name',
                 'department.name as deptName',
-                'designation.designation as designationName',
+                //'designation.designation as designationName',
                 'payrolls.basic as basic',
                 'overtime_hours',
                 'overtime_pay',
